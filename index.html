@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Countries App</title>
+
+        <link rel="shortcut icon" href="./assets/images/favicon.png">
+
+        <link rel="stylesheet" href="./assets/css/bootstrap.css">
+
+        <link rel="stylesheet" href="./assets/css/font-awesome.css">
+
+        <link rel="stylesheet" href="./assets/css/style.css">
+
+        <script src="https://unpkg.com/vue@next"></script>
+
+        <script defer src="./assets/js/app.js"></script>
+
+    </head>
+    <body>
+        
+        <div class="container my-5" id="app">
+            
+            <h1>Countries App</h1>
+
+            <input v-model='search'  type="text" placeholder="Search" class='d-block my-3 ml-auto'>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                        Name
+                        <button @click="sortType('name')" class='btn btn-outline-secondary'>
+                          <i class="fas fa-angle-down" :class="{'fa-angle-up': name}"></i>
+                        </button>
+                    </th>
+                    <th scope="col">
+                        Code
+                        <button @click="sortType('code')" class='btn btn-outline-secondary'>
+                          <i class="fas fa-angle-down" :class="{'fa-angle-up': code}"></i>
+                        </button>
+                    </th>
+                    <th scope="col">
+                        Capital
+                        <button @click="sortType('capital')" class='btn btn-outline-secondary'>
+                          <i class="fas fa-angle-down" :class="{'fa-angle-up': capital}"></i>
+                        </button>  
+                    </th>
+                    <th scope="col">
+                        Flag
+                    </th>
+                    <th scope="col">
+                        Borders
+                    </th>
+                  </tr>
+                </thead>
+                <tbody v-for='item in filteredFlags'>
+                  <tr>
+                    <td>{{item.name}}</td>
+                    <td class='w-25'>{{item.alpha2Code}}({{item.alpha3Code}})</td>
+                    <td>{{item.capital}}</td>
+                    <td><img style='width:42px' class='shadow border' :src='item.flag'></td>
+                    <td >
+                        <div class="d-inline" v-for='borderFlags in item.borders'>
+                          <img style='width:32px' class='shadow border' :src='borderFlags.flag' :title='borderFlags.name'>
+                        </div>
+                    </td>
+                  </tr>
+                
+                </tbody>
+              </table>
+
+        </div>
+
+    </body>
+</html>
